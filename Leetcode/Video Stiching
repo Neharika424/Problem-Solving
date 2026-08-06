@@ -1,0 +1,27 @@
+class Solution {
+    public int videoStitching(int[][] clips, int time) {
+        int n = clips.length;
+        Arrays.sort(clips,(a,b)-> Integer.compare(a[0],b[0]));
+
+        int end = 0;
+        int farthest = 0;
+        int count = 0;
+        int start = 0;
+
+        while(end < time){
+          while(start < n && clips[start][0] <= end){
+            farthest = Math.max(farthest,clips[start][1]);
+            start++;
+          }
+
+           if (farthest == end) {
+                return -1;
+            }
+
+          count++;
+          end = farthest;
+
+        }
+        return count;
+    }
+}
